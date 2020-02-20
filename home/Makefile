@@ -1,20 +1,22 @@
+PREREQS = ghc/mk/build.mk
+
 all: build
 
 clean:
+	$(RM) $(PREREQS)
+	$(RM) *.ghc_status
 	make -C ghc clean
 
-build: ghc.configured
+build: configured.ghc_status
 	make -C ghc -j5
 
-ghc.configured: ghc.booted
+configured.ghc_status: booted.ghc_status
 	cd ghc && ./configure
 	touch $@
 
-ghc.booted: prereqs
+booted.ghc_status: $(PREREQS)
 	cd ghc && ./boot
 	touch $@
-
-prereqs: ghc/mk/build.mk
 
 ghc/mk/build.mk: ghc/mk/build.mk.sample
 	sed \
