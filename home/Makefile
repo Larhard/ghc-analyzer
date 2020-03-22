@@ -1,6 +1,9 @@
 PREREQS = ghc/mk/build.mk
 
-all: build
+all: build analyzer
+
+analyzer::
+	$(MAKE) -C analyzer
 
 clean:
 	$(RM) $(PREREQS)
