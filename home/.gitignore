@@ -2,3 +2,4 @@
 .viminfo
 .ghc
 *.ghc_status
+*.log

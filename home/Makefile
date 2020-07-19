@@ -1,6 +1,7 @@
 PREREQS = ghc/mk/build.mk
 
-all: build analyzer
+# all: build analyzer
+all: DumperPlugin_all examples_clean examples_all
 
 analyzer::
 	$(MAKE) -C analyzer
@@ -25,6 +26,12 @@ ghc/mk/build.mk: ghc/mk/build.mk.sample
 	sed \
 		-e 's/^#BuildFlavour = quick$$/BuildFlavour = quick/' \
 		$< > $@
+
+%_all:
+	$(MAKE) -C $* all
+
+%_clean:
+	$(MAKE) -C $* clean
 
 .PHONY: build
 .PHONY: clean
